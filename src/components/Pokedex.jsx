@@ -5,10 +5,16 @@ import axios from 'axios'
 
 const Pokedex = () => {
     const [num, setnum] = useState();
+    const [name, setname] = useState();
+    const [move, setmove] = useState();
+
+
     useEffect(() => {
         async function getData() {
             const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${num}`);
-            console.log(res);
+            setname(res.data.name);
+            setmove(res.data.moves.length);
+            console.log(res.data.name);
         }
         getData();
     })
@@ -16,7 +22,9 @@ const Pokedex = () => {
   return (
     <div>
         <h1>POKEDEX</h1>
-        <h1>You choose {num} value</h1>
+        <h1>Pokemon ID No {num}</h1>
+        <h1>{name}</h1>
+        <h1>{name} number of moves is {move}</h1>
       <select name="" id="" value={num} onChange={(event) => {
         setnum(event.target.value);
       }}>
